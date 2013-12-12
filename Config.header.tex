@@ -32,13 +32,19 @@
 % PDF with Links
   \usepackage[
     colorlinks=false,
-    bookmarks = true,
-    pdftitle={\thema},
-    pdfauthor={\autor},
-    pdfsubject={\subtitle},
-    pdfkeywords={\keywords},
     urlcolor=black,
+    bookmarks=true,
+    unicode=false,
+    pdfencoding=auto
     pdfstartview=FitH]{hyperref}
+  \hypersetup{
+    pdfinfo={
+      Title={\thema},
+      Author={\autor},
+      Subject={\subtitle},
+      Keywords={\keywords}
+    }
+  }
 
 % Listings
   \usepackage{listings}
