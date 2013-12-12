@@ -14,7 +14,7 @@ Make the PDF
 
 Simply type:
 
-  make pdf
+    make pdf
 
 Per default the pdf is located at _build/BUILDNAME.
 In the Makefile you can define the output filename BUILDNAME.
@@ -34,40 +34,46 @@ In this manner you can create Figures or Code folders.
 Cheat Sheet
 -----------
 
-\begin{itemize}
-  \item X
-\end{itemize}
+Formatting Lists:
 
-\begin{enumerate}
-  \item X
-\end{enumerate}
+    \begin{itemize}
+      \item X
+    \end{itemize}
 
-http://en.wikibooks.org/wiki/LaTeX/Tables
+    \begin{enumerate}
+      \item X
+    \end{enumerate}
 
-\begin{tabular}{ l | c || r }
-  \hline                        
-  1 & 2 & 3 \\
-  4 & 5 & 6 \\
-  7 & 8 & 9 \\
-  \hline  
-\end{tabular}
+Formatting Tables: http://en.wikibooks.org/wiki/LaTeX/Tables
 
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=1.0\textwidth]{Figures/Fig.png}
-  \caption{Lorem ipsum.}\label{lorem}
-\end{figure}
+    \begin{tabular}{ l | c || r }
+      \hline                        
+      1 & 2 & 3 \\
+      4 & 5 & 6 \\
+      7 & 8 & 9 \\
+      \hline  
+    \end{tabular}
 
-\ref{lorem}
+Formatting Figures:
 
-\begin{verbatim}
-print "this is a little code snippet"
-\end{verbatim}
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=1.0\textwidth]{Figures/Fig.png}
+      \caption{Lorem ipsum.}\label{lorem}
+    \end{figure}
 
-\verb|inline verbatim|
+    \ref{lorem}
+
+Formatting Code:
+
+    \begin{verbatim}
+    print "this is a little code snippet"
+    \end{verbatim}
+
+    \verb|inline verbatim|
 
 http://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
 
-\begin{lstlisting}
-Put your code here.
-\end{lstlisting}
+    \begin{lstlisting}
+    Put your code here.
+    \end{lstlisting}
