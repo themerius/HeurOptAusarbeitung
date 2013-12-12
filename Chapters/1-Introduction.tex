@@ -1,16 +1,80 @@
-\section{Unicode support}
+\section{Datenformat}
 
 \cite{default}
 
-\subsection{English}
-All \emph{human beings} are born free and equal in dignity and rights.
- 
-\subsection{Tiếng Việt}
-Tất cả mọi người sinh ra đều được tự do và bình đẳng về nhân phẩm và 
-quyền lợi.
- 
-\section{Legacy syntax}
-When he goes---``Hello World!''\\
-She replies—“Hello dear!”
- 
-$$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$
+\noindent Beschreibung des Städte-Graphen für das Travelling-Salesman-Problem:
+
+\begin{itemize}
+  \item Header. Name und Problemtyp, Kommentar, Dimension des Problems (und der zugehörigen Matrix), Format der Kanten-Gewichte (volle Matrix)
+  \item Kantengewichte. 29 x 29 Matrix mit den Reisekosten zwischen den einzelnen Städten, symmetrische Matrix => ungerichteter Graph
+  \item Positionen der Städte. Liste mit Stadt-Nummer und X-, Y-Koordinaten
+\end{itemize}
+
+
+\section{Testläufe mit tspVorlage.m}
+
+\begin{tabular}{ | r | c | c | }
+  \hline
+  \# & Best Objective value & in Generation \\
+  \hline
+  1  & 3324 & 288 \\
+  2  & 3041 & 345 \\
+  3  & 3180 & 388 \\
+  4  & 3148 & 244 \\
+  5  & 3102 & 372 \\
+  6  & 2898 & 243 \\
+  7  & 2980 & 287 \\
+  8  & 2764 & 139 \\
+  9  & 2982 & 307 \\
+  10 & 3490 & 319 \\
+  11 & 2974 & 293 \\
+  12 & 3281 & 364 \\
+  13 & 2991 & 313 \\
+  14 & 2967 & 261 \\
+  15 & 3047 & 353 \\
+  \hline
+\end{tabular}
+
+
+\section{Parameter und Optionen}
+
+\begin{lstlisting}
+geaoptset()
+VariableFormat',            5 ...         % Use permutation variables  
+NumberSubpopulation',   1 ...         % Number of subpopulation
+NumberIndividuals',       50 ...        % Number of individuals per subpopulation
+Selection.Name',          'selrws' ...  % Define the selection function
+Selection.GenerationGap',   1 ...         % Set generation gap to 100%   
+Recombination.Name',    'recpm' ...   % Define the recombination function
+Mutation.Name',           'mutswap' ...   % Define the mutation functions
+Mutation.Rate',           10 ...        % Define the mutation rate                   
+
+Output.TextInterval',     100 ...       % Text output every 100 generations
+Output.GrafikInterval',   100 ...       % Grafic results every 100 generations
+Output.StatePlotInterval',  100       ...
+Output.StatePlotFunction',  'plottsplib' ...
+Termination.MaxGen',    400 ...       % Terminate after xx generations
+Termination.Method',    1 ...         % Termination method to use
+
+Output.SaveTextInterval',   0 ...                 % Text to File every xx generations
+Output.SaveTextFilename', [FileNameBase '.txt'] ... % Filename of result file, absolut or relative path may be included
+Output.SaveBinDataInterval',  0 ...                 % Binary Data to File every xx generations
+Output.SaveBinDataFilename', [FileNameBase '.mat'] ... % Filename of binary file, absolut or relative path may be included
+
+
+System.ObjFunFilename',   'objtsplib'
+GeaOpt = geaoptset( GeaOpt , 'System.ObjFunAddPara', {TSPLIB_NAME});
+% Get variable boundaries from objective function
+   VLUB = geaobjpara(GeaOpt.System.ObjFunFilename, 1, GeaOpt.System.ObjFunAddPara)
+   GeaOpt = geaoptset( GeaOpt , 'System.ObjFunVarBounds', VLUB); VLUB = [];
+
+% Call main GEA function
+   [xnew, GeaOpt] = geamain2(objfun, GeaOpt, VLUB, []);
+\end{lstlisting}
+
+
+\section{Automatisierte Testläufe}
+
+Ergebnis von [xnew, GeaOpt] = geamain2()
+xnew(1,:) liefert den besten Weg
+GeaOpt.Run.BestObjectiveValue liefert die geringsten Kosten
