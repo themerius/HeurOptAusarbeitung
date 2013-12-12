@@ -30,3 +30,44 @@ In Biblotgraphy.bib is the bibtex list of your references for this work.
 In Titlepages are the Templates for the titlepages.
 In Chapters is the content of the document.
 In this manner you can create Figures or Code folders.
+
+Cheat Sheet
+-----------
+
+\begin{itemize}
+  \item X
+\end{itemize}
+
+\begin{enumerate}
+  \item X
+\end{enumerate}
+
+http://en.wikibooks.org/wiki/LaTeX/Tables
+
+\begin{tabular}{ l | c || r }
+  \hline                        
+  1 & 2 & 3 \\
+  4 & 5 & 6 \\
+  7 & 8 & 9 \\
+  \hline  
+\end{tabular}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=1.0\textwidth]{Figures/Fig.png}
+  \caption{Lorem ipsum.}\label{lorem}
+\end{figure}
+
+\ref{lorem}
+
+\begin{verbatim}
+print "this is a little code snippet"
+\end{verbatim}
+
+\verb|inline verbatim|
+
+http://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
+
+\begin{lstlisting}
+Put your code here.
+\end{lstlisting}
