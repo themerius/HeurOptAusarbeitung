@@ -1,0 +1,31 @@
+\newcommand{\autor}{Max Mustermann}
+\newcommand{\documenttype}{Ausarbeitung}
+\newcommand{\thema}{Lorem ipsum}
+\newcommand{\subtitle}{
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr
+}
+\newcommand{\institute}{Hochschule Konstanz\\Fakultät Informatik}
+\newcommand{\keywords}{expose}
+
+\input{Titlepages/Default}  % Choose one Titlepage (must provide \typesetTitle)
+
+\newcommand{\titlepageAreal}{
+  \thispagestyle{empty}
+  \typesetTitle
+  \newpage
+  \clearpage
+  \setcounter{page}{1}
+}
+\newcommand{\tableOfContentsAreal}{
+  \pagenumbering{roman}
+  \tableofcontents
+  \newpage
+  \pagenumbering{arabic}
+}
+\newcommand{\bibliographyAreal}{
+  \newpage
+  \addcontentsline{toc}{section}{Literaturverzeichnis}
+  \bibliographystyle{gerabbrv}  % or apalike
+  \bibliography{bibliography}
+}
+
