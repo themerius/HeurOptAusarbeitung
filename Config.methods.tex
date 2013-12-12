@@ -1,0 +1,31 @@
+\newcommand{\autor}{Marc Bumiller und Sven Hodapp}
+\newcommand{\documenttype}{Ausarbeitung}
+\newcommand{\thema}{Heuristische Optimierungsverfahren}
+\newcommand{\subtitle}{
+  Lösung des Travelling Salesman Problems mit einem evolutionären Algorithmus
+}
+\newcommand{\institute}{Hochschule Konstanz\\Fakultät Informatik}
+\newcommand{\keywords}{expose}
+
+\input{Titlepages/Default}  % Choose one Titlepage (must provide \typesetTitle)
+
+\newcommand{\titlepageAreal}{
+  \thispagestyle{empty}
+  \typesetTitle
+  \newpage
+  \clearpage
+  \setcounter{page}{1}
+}
+\newcommand{\tableOfContentsAreal}{
+  \pagenumbering{roman}
+  \tableofcontents
+  \newpage
+  \pagenumbering{arabic}
+}
+\newcommand{\bibliographyAreal}{
+  \newpage
+  \addcontentsline{toc}{section}{Literaturverzeichnis}
+  \bibliographystyle{gerabbrv}  % or apalike
+  \bibliography{bibliography}
+}
+
