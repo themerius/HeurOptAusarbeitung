@@ -1,0 +1,5 @@
+addpath('geatbx')
+addpath('geatbx/objfun')
+addpath('geatbx/plotext')
+addpath('geatbx/scripts')
+addpath('geatbx/utils')
