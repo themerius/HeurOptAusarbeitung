@@ -1,4 +1,9 @@
-function [xnew, GeaOpt] = tsp(name, value)
+function [xnew, GeaOpt] = tsp(name, value, args)
+%tsp Runs TSP
+%   name:  Parameter to change
+%   value: Value for the parameter
+%   args:  Additional parameter/value pairs
+
 % DEMO for optimizing 'TSP Library' examples
 %
 % This script provides an example for defining non-default parameters
@@ -20,8 +25,8 @@ function [xnew, GeaOpt] = tsp(name, value)
 % History:      20.07.99    file created
 
 % Modified by:  Wilhelm Erben, May 2012
-  
-include
+
+   include
 
 % Define special parameters
    GeaOpt = geaoptset(  'VariableFormat',           5 ...           % Use permutation variables  
@@ -40,7 +45,7 @@ include
                       , 'Termination.MaxGen',       400 ...         % Terminate after xx generations
                       , 'Termination.Method',       1 ...           % Termination method to use
                       );
-                  
+
 % Define special parameters for saving results
    FileNameBase = 'test_tsplib';
    GeaOpt = geaoptset( GeaOpt ...
@@ -49,7 +54,6 @@ include
                       , 'Output.SaveBinDataInterval',  0 ...                    % Binary Data to File every xx generations
                       , 'Output.SaveBinDataFilename', [FileNameBase '.mat'] ... % Filename of binary file, absolut or relative path may be included
                       );
-
 
 % Define objective function to use
    GeaOpt = geaoptset( GeaOpt , 'System.ObjFunFilename', 'objtsplib');
@@ -72,8 +76,13 @@ include
    VLUB = [];
 
 % Override variable for test runs
+   nArgs = length(args);
+   for k = 1:2:nArgs
+      GeaOpt = geaoptset( GeaOpt , args{k}, args{k+1} );
+   end
+
    GeaOpt = geaoptset( GeaOpt , name, value);
-   
+
 % Call main GEA function
    [xnew, GeaOpt] = geamain2(objfun, GeaOpt, VLUB, []);
 
