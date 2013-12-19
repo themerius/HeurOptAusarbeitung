@@ -54,6 +54,14 @@ Formatting Tables: http://en.wikibooks.org/wiki/LaTeX/Tables
       \hline  
     \end{tabular}
 
+Table with captions: http://www.weinelt.de/latex/table.html
+
+    \begin{table}[tbp]
+      % tabular
+      \caption{Lorem ipsum.}
+    \end{table}
+
+
 Formatting Figures:
 
     \begin{figure}[h!]
