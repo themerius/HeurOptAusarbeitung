@@ -28,6 +28,7 @@ move:
 
 gen:
 	python Code/stats.py tex > Chapters/Gen.StatsTable.tex
+	python Code/stats.plot_tspVorlage.py
 
 clean:
 	rm -f $(CHAPTER)*.aux

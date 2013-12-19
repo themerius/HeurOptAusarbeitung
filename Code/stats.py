@@ -62,10 +62,10 @@ def print_table():
 
 def print_TeXtable():
     for varname, list in sorted(stats.items()):
-        print "\\begin{table}[tbp]"
+        print "\\begin{table}[tbph]"
         print "\\begin{tabular}{ | c || r | r | r | r | r | }"
         print "\\hline"
-        print u"Parameter & \# Läufe & Mittelwert & Std.-Abw. & Laufzeit & Min, Max \\\\".encode('utf-8')
+        print u"Parameter & \# Iterationen & Mittelwert & Std.-Abw. & Laufzeit & Min, Max \\\\".encode('utf-8')
         print "\\hline"
 
         for value, obj in sorted(list.items()):
