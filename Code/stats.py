@@ -74,7 +74,7 @@ def print_TeXtable():
 
         print "\\hline"
         print "\\end{tabular}"
-        print "\\caption{"+varname+"}"
+        print "\\caption{"+varname+"}\\label{"+varname+"}"
         print "\\end{table}"
         print "\n"
 
