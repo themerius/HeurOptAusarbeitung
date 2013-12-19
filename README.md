@@ -34,6 +34,11 @@ In this manner you can create Figures or Code folders.
 Cheat Sheet
 -----------
 
+Formatting fonts:
+
+    \emph{Kursiv}
+    \tt{Typewriter}
+
 Formatting Lists:
 
     \begin{itemize}
