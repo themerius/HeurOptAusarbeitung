@@ -66,39 +66,68 @@ gesucht, um einen möglichst kurzen Weg mit möglichst geringer Laufzeit zu find
 
 \section{Parameter und Optionen}
 
-\begin{lstlisting}
-geaoptset()
-VariableFormat',            5 ...         % Use permutation variables  
-NumberSubpopulation',   1 ...         % Number of subpopulation
-NumberIndividuals',       50 ...        % Number of individuals per subpopulation
-Selection.Name',          'selrws' ...  % Define the selection function
-Selection.GenerationGap',   1 ...         % Set generation gap to 100%   
-Recombination.Name',    'recpm' ...   % Define the recombination function
-Mutation.Name',           'mutswap' ...   % Define the mutation functions
-Mutation.Rate',           10 ...        % Define the mutation rate                   
+Mit der Methode {\tt geaoptset( Key, Value )} können beliebig viele
+Parameter an den evolutionären Algorithmus übergeben\footnote{Natürlich
+muss der Algorithmus diese Parameter auch verarbeiten können.} werden.
+Eine nochmalige Zuweisung des {\tt Key} überschreibt den {\tt Value}.
+Im Folgenden sollen die ausschlaggebenden Parameter und
+ihre Auswirkungen griffig beschrieben werden.
 
-Output.TextInterval',     100 ...       % Text output every 100 generations
-Output.GrafikInterval',   100 ...       % Grafic results every 100 generations
-Output.StatePlotInterval',  100       ...
-Output.StatePlotFunction',  'plottsplib' ...
-Termination.MaxGen',    400 ...       % Terminate after xx generations
-Termination.Method',    1 ...         % Termination method to use
+% TODO: Intervalle der Voreinstellungen aufschreiben.
+% TODO: ggf. genauere Beschreibungen von der Doku übernehmen
 
-Output.SaveTextInterval',   0 ...                 % Text to File every xx generations
-Output.SaveTextFilename', [FileNameBase '.txt'] ... % Filename of result file, absolut or relative path may be included
-Output.SaveBinDataInterval',  0 ...                 % Binary Data to File every xx generations
-Output.SaveBinDataFilename', [FileNameBase '.mat'] ... % Filename of binary file, absolut or relative path may be included
+\paragraph{{\tt VariableFormat}} Permutationsparameter?
+Voreinstellung: 5.
 
+\paragraph{{\tt NumberSubpopulation}} Gibt die Anzahl der Unterpopulationen an.
+Bildlich gesprochen: die Anzahl der Indianerstämme.
+Voreinstellung: 1.
 
-System.ObjFunFilename',   'objtsplib'
-GeaOpt = geaoptset( GeaOpt , 'System.ObjFunAddPara', {TSPLIB_NAME});
-% Get variable boundaries from objective function
-   VLUB = geaobjpara(GeaOpt.System.ObjFunFilename, 1, GeaOpt.System.ObjFunAddPara)
-   GeaOpt = geaoptset( GeaOpt , 'System.ObjFunVarBounds', VLUB); VLUB = [];
+\paragraph{{\tt NumberIndividuals}} Regelt die Anzahl
+der Individuen die pro Unterpopulation existieren.
+Voreinstellung: 50.
 
-% Call main GEA function
-   [xnew, GeaOpt] = geamain2(objfun, GeaOpt, VLUB, []);
-\end{lstlisting}
+\paragraph{{\tt Selection.Name}} Legt fest mit welcher Funktion Individuen
+aussortiert werden, welche also nicht mehr in die nächste Generation
+übernommen werden.
+Voreinstellung: selrws.
+
+\paragraph{{\tt Selection.GenerationGap}}
+Voreinstellung: 1 (=100 Prozent).
+
+\paragraph{{\tt Recombination.Name}} Regelt mit welcher Fortpflanzungsmethode
+sich Individuen kreuzen.
+Voreinstellung: recpm.
+
+\paragraph{{\tt Mutation.Name}} Legt fest mit welcher Funktion eine Mutation
+an einem Individuum durchgeführt wird.
+Voreinstellung: mutswap.
+
+\paragraph{{\tt Mutation.Rate}} Gibt die Wahrscheinlichkeit einer Mutation
+pro Individuum an.
+Voreinstellung: 10.
+
+\paragraph{{\tt Termination.MaxGen}} Der Algorithmus soll nach einer bestimmten
+Anzahl an Generationen anhalten.
+Voreinstellung: 400.
+
+\paragraph{{\tt Termination.Method}} Legt fest mit welcher Methode die
+Generationen beseitigt werden, um Platz für neuen Generationen zu schaffen.
+Voreinstellung: 1.
+
+\paragraph{{\tt Output.*}} Diese Parameter sorgen für die
+Ausgabe\footnote{In Form vom Plots, Standard-Out und Dateien.} der Resultate,
+jedoch sind diese nicht relevant, da das in Kapitel \ref{testlaeufe} beschriebene
+automatisierte Testsystem all diese Aufgaben übernimmt.
+
+\paragraph{{\tt [xnew, GeaOpt] = geamain2(objfun, GeaOpt, VLUB, []);}}
+Hauptfunktion die zwei Datenstrukturen zurückgibt, wobei folgende
+Informationen von besonderem Interesse sind:
+
+\begin{itemize}
+  \item Der beste Weg: {\tt xnew(1,:)}
+  \item Länge des kürzesten Weges: {\tt GeaOpt.Run.BestObjectiveValue}
+\end{itemize}
 
 
 \section{Automatisierte Testläufe}\label{testlaeufe}
@@ -111,9 +140,7 @@ die Parameter systematisch abzusuchen sodass ideale Parametrisierungen
 gefunden werden. Das Testsystem wird im Folgenden erklärt, die Ergebnisse
 werden in Kapitel \ref{ergebnisse} präsentiert und analysiert.
 
-Ergebnis von [xnew, GeaOpt] = geamain2()
-xnew(1,:) liefert den besten Weg
-GeaOpt.Run.BestObjectiveValue liefert die geringsten Kosten
+
 
 \subsection{Ergebnisse}\label{ergebnisse}
 
