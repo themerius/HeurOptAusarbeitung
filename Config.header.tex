@@ -1,6 +1,6 @@
 \documentclass[11pt, a4paper]{article}
 
-\input{config.methods}
+\input{Config.methods}
 
 % Recommended for XeLaTeX
   \usepackage{fontspec}
@@ -40,12 +40,10 @@
     pdfencoding=auto
     pdfstartview=FitH]{hyperref}
   \hypersetup{
-    pdfinfo={
-      Title={\thema},
-      Author={\autor},
-      Subject={\subtitle},
-      Keywords={\keywords}
-    }
+    pdftitle={\thema},
+    pdfauthor={\autor},
+    pdfsubject={\subtitle},
+    pdfkeywords={\keywords}
   }
 
 % Listings
