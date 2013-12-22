@@ -1,21 +1,41 @@
 \section{Datenformat}
 
-\cite{default}
-
-\noindent Beschreibung des Städte-Graphen für das Travelling-Salesman-Problem:
+\noindent In der Datei {\tt bays29.tsp} sind 29 bayrische Städte aufgeführt.
+Der Kern der Datei ist die 29x29 Matrix, welche die Reisekosten zwischen
+den den einzelnen Stäten beschreibt, dieser Städte-Graph ist zur Lösung
+des Travelling-Salesman-Problems (TSP) gedacht.
+Details des Aufbaus der Datei:
 
 \begin{itemize}
-  \item Header. Name und Problemtyp, Kommentar, Dimension des Problems (und der zugehörigen Matrix), Format der Kanten-Gewichte (volle Matrix)
-  \item Kantengewichte. 29 x 29 Matrix mit den Reisekosten zwischen den einzelnen Städten, symmetrische Matrix => ungerichteter Graph
-  \item Positionen der Städte. Liste mit Stadt-Nummer und X-, Y-Koordinaten
+  \item Header.\\
+  Name, Problemtyp, Kommentar, Dimension des Problems bzw. der Matrix, Typ und Format der Kantengewichte
+  \item Kantengewichte.\\
+  29 x 29 Matrix mit den Reisekosten zwischen den einzelnen Städten als symmetrische Matrix, d.h. es handelt sich um einen ungerichteter Graphen.
+  \item Positionen der Städte.\\
+  Liste mit Stadtnummer und X-, Y-Koordinaten welche die Städtepositionen beschreiben.
 \end{itemize}
 
 
 \section{Testläufe mit tspVorlage.m}
 
+Das {\tt tspVorlage.m} Skript wurde 15 mal ausgeführt und die Ergebnisse in
+Tabelle \ref{testlaeufe} festgehalten und auf Abbildung \ref{fig.testlaeufe}
+visualisiert.
+Eine kleine Auswertung ergibt einen Mittelwert von 3077.93 km mit
+einer Standardabweichung von 177.05 km.
+Das Minimum beträgt 2764 km und das Maximum 3490 km.
+
+Laut \cite{aufg} liegt die beste
+Lösung\footnote{In der Software \emph{best objective value} genannt.},
+also der kürzeste Weg für eine Rundreise, bei 2020 km.
+Das bedeutet, hier gibt es noch Optimierungsbedarf.
+In Kapitel \ref{testlaeufe} werden systematisch bessere Einstellungsparameter
+gesucht, um einen möglichst kurzen Weg mit möglichst geringer Laufzeit zu finden.
+
+\begin{table}[h]
 \begin{tabular}{ | r | c | c | }
   \hline
-  \# & Best Objective value & in Generation \\
+  \# Iteration & kürzester Weg & in Generation \\
   \hline
   1  & 3324 & 288 \\
   2  & 3041 & 345 \\
@@ -34,47 +54,94 @@
   15 & 3047 & 353 \\
   \hline
 \end{tabular}
+\caption{Testläufe mit {\tt tspVorlage.m}}\label{testlaeufe}
+\end{table}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=1.0\textwidth]{Figures/tspVorlage.png}
+  \caption{Testläufe mit {\tt tspVorlage.m}}\label{fig.testlaeufe}
+\end{figure}
 
 
 \section{Parameter und Optionen}
 
-\begin{lstlisting}
-geaoptset()
-VariableFormat',            5 ...         % Use permutation variables  
-NumberSubpopulation',   1 ...         % Number of subpopulation
-NumberIndividuals',       50 ...        % Number of individuals per subpopulation
-Selection.Name',          'selrws' ...  % Define the selection function
-Selection.GenerationGap',   1 ...         % Set generation gap to 100%   
-Recombination.Name',    'recpm' ...   % Define the recombination function
-Mutation.Name',           'mutswap' ...   % Define the mutation functions
-Mutation.Rate',           10 ...        % Define the mutation rate                   
+Mit der Methode {\tt geaoptset( Key, Value )} können beliebig viele
+Parameter an den evolutionären Algorithmus übergeben\footnote{Natürlich
+muss der Algorithmus diese Parameter auch verarbeiten können.} werden.
+Eine nochmalige Zuweisung des {\tt Key} überschreibt den {\tt Value}.
+Im Folgenden sollen die ausschlaggebenden Parameter und
+ihre Auswirkungen griffig beschrieben werden.
 
-Output.TextInterval',     100 ...       % Text output every 100 generations
-Output.GrafikInterval',   100 ...       % Grafic results every 100 generations
-Output.StatePlotInterval',  100       ...
-Output.StatePlotFunction',  'plottsplib' ...
-Termination.MaxGen',    400 ...       % Terminate after xx generations
-Termination.Method',    1 ...         % Termination method to use
+% TODO: Intervalle der Voreinstellungen aufschreiben.
+% TODO: ggf. genauere Beschreibungen von der Doku übernehmen
 
-Output.SaveTextInterval',   0 ...                 % Text to File every xx generations
-Output.SaveTextFilename', [FileNameBase '.txt'] ... % Filename of result file, absolut or relative path may be included
-Output.SaveBinDataInterval',  0 ...                 % Binary Data to File every xx generations
-Output.SaveBinDataFilename', [FileNameBase '.mat'] ... % Filename of binary file, absolut or relative path may be included
+\paragraph{{\tt VariableFormat}} Permutationsparameter?
+Voreinstellung: 5.
+
+\paragraph{{\tt NumberSubpopulation}} Gibt die Anzahl der Unterpopulationen an.
+Bildlich gesprochen: die Anzahl der Indianerstämme.
+Voreinstellung: 1.
+
+\paragraph{{\tt NumberIndividuals}} Regelt die Anzahl
+der Individuen die pro Unterpopulation existieren.
+Voreinstellung: 50.
+
+\paragraph{{\tt Selection.Name}} Legt fest mit welcher Funktion Individuen
+aussortiert werden, welche also nicht mehr in die nächste Generation
+übernommen werden.
+Voreinstellung: selrws.
+
+\paragraph{{\tt Selection.GenerationGap}}
+Voreinstellung: 1 (=100 Prozent).
+
+\paragraph{{\tt Recombination.Name}} Regelt mit welcher Fortpflanzungsmethode
+sich Individuen kreuzen.
+Voreinstellung: recpm.
+
+\paragraph{{\tt Mutation.Name}} Legt fest mit welcher Funktion eine Mutation
+an einem Individuum durchgeführt wird.
+Voreinstellung: mutswap.
+
+\paragraph{{\tt Mutation.Rate}} Gibt die Wahrscheinlichkeit einer Mutation
+pro Individuum an.
+Voreinstellung: 10.
+
+\paragraph{{\tt Termination.MaxGen}} Der Algorithmus soll nach einer bestimmten
+Anzahl an Generationen anhalten.
+Voreinstellung: 400.
+
+\paragraph{{\tt Termination.Method}} Legt fest mit welcher Methode die
+Generationen beseitigt werden, um Platz für neuen Generationen zu schaffen.
+Voreinstellung: 1.
+
+\paragraph{{\tt Output.*}} Diese Parameter sorgen für die
+Ausgabe\footnote{In Form vom Plots, Standard-Out und Dateien.} der Resultate,
+jedoch sind diese nicht relevant, da das in Kapitel \ref{testlaeufe} beschriebene
+automatisierte Testsystem all diese Aufgaben übernimmt.
+
+\paragraph{{\tt [xnew, GeaOpt] = geamain2(objfun, GeaOpt, VLUB, []);}}
+Hauptfunktion die zwei Datenstrukturen zurückgibt, wobei folgende
+Informationen von besonderem Interesse sind:
+
+\begin{itemize}
+  \item Der beste Weg: {\tt xnew(1,:)}
+  \item Länge des kürzesten Weges: {\tt GeaOpt.Run.BestObjectiveValue}
+\end{itemize}
 
 
-System.ObjFunFilename',   'objtsplib'
-GeaOpt = geaoptset( GeaOpt , 'System.ObjFunAddPara', {TSPLIB_NAME});
-% Get variable boundaries from objective function
-   VLUB = geaobjpara(GeaOpt.System.ObjFunFilename, 1, GeaOpt.System.ObjFunAddPara)
-   GeaOpt = geaoptset( GeaOpt , 'System.ObjFunVarBounds', VLUB); VLUB = [];
+\section{Automatisierte Testläufe}\label{testlaeufe}
 
-% Call main GEA function
-   [xnew, GeaOpt] = geamain2(objfun, GeaOpt, VLUB, []);
-\end{lstlisting}
+In der Aufgabenstellung \cite{aufg} ist verlangt \emph{eine Konstellation zu finden,
+unter der der Algorithmus möglichst gute Lösungen in möglichst kurzer Zeit} findet.
+Um dies zu bewerkstelligen, müssen bessere Parametrisierungen für den Algorithmus
+gefunden werden. Dazu wurde ein automatisiertes Testsystem aufgebaut, um
+die Parameter systematisch abzusuchen sodass ideale Parametrisierungen
+gefunden werden. Das Testsystem wird im Folgenden erklärt, die Ergebnisse
+werden in Kapitel \ref{ergebnisse} präsentiert und analysiert.
 
 
-\section{Automatisierte Testläufe}
 
-Ergebnis von [xnew, GeaOpt] = geamain2()
-xnew(1,:) liefert den besten Weg
-GeaOpt.Run.BestObjectiveValue liefert die geringsten Kosten
+\subsection{Ergebnisse}\label{ergebnisse}
+
+\input{Chapters/Gen.StatsTable}
