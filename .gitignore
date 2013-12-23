@@ -28,6 +28,7 @@ _build/
 *.ps
 *.snm
 *.synctex.gz
+*.tex~
 *.toc
 *.vrb
 *.xdy

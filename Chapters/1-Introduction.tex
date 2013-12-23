@@ -2,7 +2,7 @@
 
 \noindent In der Datei {\tt bays29.tsp} sind 29 bayrische Städte aufgeführt.
 Der Kern der Datei ist die 29x29 Matrix, welche die Reisekosten zwischen
-den den einzelnen Stäten beschreibt, dieser Städte-Graph ist zur Lösung
+den den einzelnen Städten beschreibt, dieser Städte-Graph ist zur Lösung
 des Travelling-Salesman-Problems (TSP) gedacht.
 Details des Aufbaus der Datei:
 
@@ -10,9 +10,9 @@ Details des Aufbaus der Datei:
   \item Header.\\
   Name, Problemtyp, Kommentar, Dimension des Problems bzw. der Matrix, Typ und Format der Kantengewichte
   \item Kantengewichte.\\
-  29 x 29 Matrix mit den Reisekosten zwischen den einzelnen Städten als symmetrische Matrix, d.h. es handelt sich um einen ungerichteter Graphen.
+  29 x 29 Matrix mit den Reisekosten zwischen den einzelnen Städten als symmetrische Matrix, d.h. es handelt sich um einen ungerichteten Graphen.
   \item Positionen der Städte.\\
-  Liste mit Stadtnummer und X-, Y-Koordinaten welche die Städtepositionen beschreiben.
+  Liste mit Stadtnummer und X-, Y-Koordinaten, welche die Städtepositionen beschreiben.
 \end{itemize}
 
 
@@ -29,7 +29,7 @@ Laut \cite{aufg} liegt die beste
 Lösung\footnote{In der Software \emph{best objective value} genannt.},
 also der kürzeste Weg für eine Rundreise, bei 2020 km.
 Das bedeutet, hier gibt es noch Optimierungsbedarf.
-In Kapitel \ref{testlaeufe} werden systematisch bessere Einstellungsparameter
+In den Kapiteln \ref{populations} bis \ref{mutation} werden systematisch bessere Einstellungsparameter
 gesucht, um einen möglichst kurzen Weg mit möglichst geringer Laufzeit zu finden.
 
 \begin{table}[h]
@@ -76,48 +76,51 @@ ihre Auswirkungen griffig beschrieben werden.
 % TODO: Intervalle der Voreinstellungen aufschreiben.
 % TODO: ggf. genauere Beschreibungen von der Doku übernehmen
 
-\paragraph{{\tt VariableFormat}} Permutationsparameter?
-Voreinstellung: 5.
+\paragraph{{\tt VariableFormat}} Die Option definiert das Format der Variablen
+und die Konvertierung zwischen der internen Repräsentation (Genotyp) und dem
+Phänotyp.
+Voreinstellung: 5 (Ordnungs- \& Permutationsprobleme).
 
 \paragraph{{\tt NumberSubpopulation}} Gibt die Anzahl der Unterpopulationen an.
 Bildlich gesprochen: die Anzahl der Indianerstämme.
 Voreinstellung: 1.
 
 \paragraph{{\tt NumberIndividuals}} Regelt die Anzahl
-der Individuen die pro Unterpopulation existieren.
+der Individuen, welche pro Unterpopulation existieren.
 Voreinstellung: 50.
 
 \paragraph{{\tt Selection.Name}} Legt fest mit welcher Funktion Individuen
 aussortiert werden, welche also nicht mehr in die nächste Generation
 übernommen werden.
-Voreinstellung: selrws.
+Voreinstellung: selrws (Roulette Wheel Selection).
 
-\paragraph{{\tt Selection.GenerationGap}}
+\paragraph{{\tt Selection.GenerationGap}} Anteil der Population, welcher pro
+Generation reproduziert wird.
 Voreinstellung: 1 (=100 Prozent).
 
 \paragraph{{\tt Recombination.Name}} Regelt mit welcher Fortpflanzungsmethode
 sich Individuen kreuzen.
-Voreinstellung: recpm.
+Voreinstellung: recpm (Partially matched Crossover).
 
 \paragraph{{\tt Mutation.Name}} Legt fest mit welcher Funktion eine Mutation
 an einem Individuum durchgeführt wird.
-Voreinstellung: mutswap.
+Voreinstellung: mutswap (mutation by swapping variables).
 
-\paragraph{{\tt Mutation.Rate}} Gibt die Wahrscheinlichkeit einer Mutation
+\paragraph{{\tt Mutation.Rate}} Gibt die Anzahl der Mutationen
 pro Individuum an.
 Voreinstellung: 10.
 
-\paragraph{{\tt Termination.MaxGen}} Der Algorithmus soll nach einer bestimmten
-Anzahl an Generationen anhalten.
+\paragraph{{\tt Termination.MaxGen}} Gibt an, wie viele Generationen der
+Algorithmus berechnen soll.
 Voreinstellung: 400.
 
-\paragraph{{\tt Termination.Method}} Legt fest mit welcher Methode die
-Generationen beseitigt werden, um Platz für neuen Generationen zu schaffen.
-Voreinstellung: 1.
+\paragraph{{\tt Termination.Method}} Legt fest mit welcher Methode der
+Optimierungsalgorithmus beendet werden soll.
+Voreinstellung: 1 (Beenden nach der maximalen Anzahl der Generationen).
 
 \paragraph{{\tt Output.*}} Diese Parameter sorgen für die
 Ausgabe\footnote{In Form vom Plots, Standard-Out und Dateien.} der Resultate,
-jedoch sind diese nicht relevant, da das in Kapitel \ref{testlaeufe} beschriebene
+jedoch sind diese nicht relevant, da das in Kapitel \ref{testsystem} beschriebene
 automatisierte Testsystem all diese Aufgaben übernimmt.
 
 \paragraph{{\tt [xnew, GeaOpt] = geamain2(objfun, GeaOpt, VLUB, []);}}
@@ -129,19 +132,3 @@ Informationen von besonderem Interesse sind:
   \item Länge des kürzesten Weges: {\tt GeaOpt.Run.BestObjectiveValue}
 \end{itemize}
 
-
-\section{Automatisierte Testläufe}\label{testlaeufe}
-
-In der Aufgabenstellung \cite{aufg} ist verlangt \emph{eine Konstellation zu finden,
-unter der der Algorithmus möglichst gute Lösungen in möglichst kurzer Zeit} findet.
-Um dies zu bewerkstelligen, müssen bessere Parametrisierungen für den Algorithmus
-gefunden werden. Dazu wurde ein automatisiertes Testsystem aufgebaut, um
-die Parameter systematisch abzusuchen sodass ideale Parametrisierungen
-gefunden werden. Das Testsystem wird im Folgenden erklärt, die Ergebnisse
-werden in Kapitel \ref{ergebnisse} präsentiert und analysiert.
-
-
-
-\subsection{Ergebnisse}\label{ergebnisse}
-
-\input{Chapters/Gen.StatsTable}
