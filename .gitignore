@@ -35,3 +35,5 @@ _build/
 *.tdo
 Code/geatbx/
 Code/geatbxTutorial/
+Chapters/gen
+Figures/gen

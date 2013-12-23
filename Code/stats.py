@@ -12,6 +12,11 @@ def getPath(to):
     path = path + "/" + to
     return path
 
+dir = getPath("../Chapters/gen/")
+
+if not os.path.exists(dir):
+    os.makedirs(dir)
+
 results = getPath(to="results")
 
 stats = {}
@@ -25,6 +30,14 @@ class Result(object):
         self.max    = numpy.max(objectiveValues)
         self.time   = -1
 
+def parseValue(valueStr):
+    try:
+        return int(valueStr)
+    except:
+        try:
+            return float(valueStr)
+        except:
+            return valueStr # keep the string
 
 def stat(dir, filename):
     data = numpy.loadtxt(os.path.join(dir, filename))
@@ -44,7 +57,8 @@ def stat(dir, filename):
     if varname not in stats:
         stats[varname] = {}
 
-    stats[varname][float(value.replace('.txt', ''))] = obj
+    value = parseValue(value.replace('.txt', ''))
+    stats[varname][value] = obj
 
 
 for root, dirs, files in os.walk(results):
@@ -57,29 +71,31 @@ def print_table():
         print '\n' + varname
 
         for value, obj in sorted(list.items()):
-            print "%7.2f: %3d %7.2f %7.2f %7.2f (%d, %d)" % \
-                (value, obj.number, obj.mean, obj.std, obj.time, obj.min, obj.max)
+            print "%8s: %3d %7.2f %7.2f %7.2f (%d, %d)" % \
+                (str(value), obj.number, obj.mean, obj.std, obj.time, obj.min, obj.max)
 
-def print_TeXtable():
+def save_TeXtable():
     for varname, list in sorted(stats.items()):
-        print "\\begin{table}[tbph]"
-        print "\\begin{tabular}{ | c || r | r | r | r | r | }"
-        print "\\hline"
-        print u"Parameter & \# Iterationen & Mittelwert & Std.-Abw. & Laufzeit & Min, Max \\\\".encode('utf-8')
-        print "\\hline"
+        with open(dir + varname + '.tex', 'w') as f:
+            f.write((u"""%% %s
+\\begin{table}[tbph]
+\\begin{tabular}{ | c || r | r | r | r | r | }
+\\hline
+Parameter & \# Iterationen & Mittelwert & Std.-Abw. & Laufzeit & Min, Max \\\\
+\\hline\n""" % varname).encode('utf-8'))
 
-        for value, obj in sorted(list.items()):
-            print "%7.2f & %3d & %7.2f & %7.2f & %7.2f & %d, %d \\\\" % \
-                (value, obj.number, obj.mean, obj.std, obj.time, obj.min, obj.max)
+            for value, obj in sorted(list.items()):
+                f.write("%8s & %3d & %7.2f & %7.2f & %7.2f & %d, %d \\\\\n" % \
+                    (str(value), obj.number, obj.mean, obj.std, obj.time, obj.min, obj.max))
 
-        print "\\hline"
-        print "\\end{tabular}"
-        print "\\caption{"+varname+"}\\label{"+varname+"}"
-        print "\\end{table}"
-        print "\n"
+            f.write("""\\hline
+\\end{tabular}
+\\caption{%s}\\label{%s}
+\\end{table}""" % (varname, varname))
 
 if __name__ == "__main__":
     if "tex" in sys.argv:
-        print_TeXtable()
+        save_TeXtable()
     else:
         print_table()
+

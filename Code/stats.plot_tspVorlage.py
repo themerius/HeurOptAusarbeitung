@@ -3,6 +3,12 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+import os
+
+dir = "Figures/gen/"
+
+if not os.path.exists(dir):
+    os.makedirs(dir)
 
 # example data
 x = np.arange(15) + 1
@@ -23,5 +29,5 @@ y = np.array([3324,
  3047])
 
 plt.errorbar(x, y)
-plt.savefig("Figures/tspVorlage.png")
+plt.savefig(dir + "tspVorlage.png")
 #plt.show()
