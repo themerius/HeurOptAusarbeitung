@@ -27,7 +27,7 @@ move:
 	open $(BUILDPATH)$(BUILDNAME).pdf
 
 gen:
-	python Code/stats.py tex > Chapters/Gen.StatsTable.tex
+	python Code/stats.py tex
 	python Code/stats.plot_tspVorlage.py
 
 clean:
