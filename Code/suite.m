@@ -1,6 +1,8 @@
 
 runs = 10;
 
+
+% Populations
 testTsp('NumberIndividuals', ...
     {10, 20, 30, 50, 75, 100, 200, 300, 400, 500, 625, 750, 1000, 1250, 1500}, runs);
 
@@ -8,7 +10,7 @@ testTsp('NumberSubpopulation', ...
     {1, 2, 3, 5, 7, 10, 15, 20, 30, 40, 50}, runs);
 
 
-% http://www.geatbx.com/docu/options-05.html
+% Migration
 subPops = 5;
 
 testTsp('Migration.Interval', ...
@@ -31,4 +33,19 @@ testTsp('Migration.Selection', ...
 % Selection
 testTsp('Selection.Name', ...
     {'selrws', 'selsus', 'seltour'}, runs);
+
+
+% Recombination
+% TODO
+
+
+% Mutation
+methods = {'mutswap', 'mutmove', 'mutinvert'};
+
+for i=1:length(methods)
+    method = methods{i};
+    testTsp('Mutation.Rate', ...
+        {0.5, 1, 2, 5, 10, 20, 30}, ...
+        runs, 'Mutation.Name', method, strcat('_', method));
+end
 

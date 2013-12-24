@@ -76,15 +76,17 @@ function [xnew, GeaOpt] = tsp(name, value, args)
    VLUB = [];
 
 % Override variable for test runs
-   nArgs = length(args);
+   nArgs = length(args) - 1; % last element may contain a part of the filename
    for k = 1:2:nArgs
       GeaOpt = geaoptset( GeaOpt , args{k}, args{k+1} );
+      %DEBUG { args{k}, args{k+1} }
    end
 
    GeaOpt = geaoptset( GeaOpt , name, value);
 
 % Call main GEA function
    [xnew, GeaOpt] = geamain2(objfun, GeaOpt, VLUB, []);
+   %DEBUG xnew = zeros(10,10);
 
 % End of script
 end
