@@ -3,6 +3,7 @@
 MAINTEX = Document
 CHAPTER = Chapters/
 TITLEPAGES = Titlepages/
+FIGURES = Figures/
 BUILDPATH = _build/
 BUILDNAME = HeurOptAusarbeitung_M.Bumiller-S.Hodapp_2013
 
@@ -35,3 +36,6 @@ clean:
 	rm -f $(TITLEPAGES)*.aux
 	rm -f $(MAINTEX).aux $(MAINTEX).toc $(MAINTEX).log $(MAINTEX).out
 	rm -f $(MAINTEX).lof $(MAINTEX).bbl $(MAINTEX).blg
+	rm -rf $(CHAPTER)gen
+	rm -rf $(FIGURES)gen
+

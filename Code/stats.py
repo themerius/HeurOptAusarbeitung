@@ -76,7 +76,7 @@ def print_table():
 
 def save_TeXtable():
     for varname, list in sorted(stats.items()):
-        with open(dir + varname + '.tex', 'w') as f:
+        with open(dir + varname.replace('_', '.') + '.tex', 'w') as f:
             f.write((u"""%% %s
 \\begin{table}[tbph]
 \\begin{tabular}{ | c || r | r | r | r | r | }
@@ -91,7 +91,7 @@ Parameter & \# Iterationen & Mittelwert & Std.-Abw. & Laufzeit & Min, Max \\\\
             f.write("""\\hline
 \\end{tabular}
 \\caption{%s}\\label{%s}
-\\end{table}""" % (varname, varname))
+\\end{table}""" % (varname.replace('_', ' '), varname.replace('_', '.')))
 
 if __name__ == "__main__":
     if "tex" in sys.argv:
