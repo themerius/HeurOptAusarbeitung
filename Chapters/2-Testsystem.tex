@@ -9,3 +9,79 @@ gefunden werden. Das Testsystem wird im Folgenden erklärt, die einzelnen Testl�
 und deren Ergebnisse werden in den darauffolgenden Kapiteln präsentiert und
 analysiert.
 
+Neben dem \emph{GEATbx}-Framework besteht das automatisierte Testsystem aus den
+folgenden drei Matlab-Funktionen beziehungsweise -Skripten.
+
+
+\paragraph{tsp.m} enthält die Matlab-Funktion {\tt tsp()}, welche auf dem
+zur Verfügung gestellten Skript \emph{tspVorlage.m} basiert. Der folgende
+Codeabschnitt enthält die formale Schnittstelle der Funktion, wobei \emph{name}
+und \emph{value} den zu testenden Parameter des evolutionären Algorithmus mit
+zugehörigen Wert bezeichnen.
+Für manche Testläufe müssen weitere Parameter gesetzt werden, beispielsweise
+bei den Migrationsparametern in Kapitel \ref{populations}. Dafür dient der
+dritte Parameter \emph{args}, welcher als Liste in der Form
+\{ Key$_{1}$, Value$_{1}$, Key$_{2}$, Value$_{2}$, ..., Key$_{N}$, Value$_{N}$ \}
+beliebig viele weitere Schlüssel-Wert-Paare an den Algorithmus übergibt.
+Die Rückgabewerte entsprechen exakt denen der Funktion {\tt geamain2()} des
+\emph{GEATbx}-Frameworks.
+
+\lstinputlisting[language=Matlab, lastline=1]{Code/tsp.m}
+
+\noindent Die Initialisierung mit Default-Werten entspricht genau der Datei
+\emph{tspVorlage.m} mit dem Unterschied, dass der Dateiname fest auf "'bays29"'
+gesetzt ist. Vor dem Aufruf von {\tt geamain2()} werden schließlich die
+übergebenen Parameter in die GeaOpt-Struktur gesetzt:
+\lstinputlisting[language=Matlab, firstnumber=78, firstline=78, lastline=85]{Code/tsp.m}
+
+
+\paragraph{testTsp.m} stellt ebenfalls eine Matlab-Funktion dar, welche
+verschiedene Werte für einen Parameter des evolutionären Algorithmus durchtestet
+und die jeweiligen Ergebnisse der einzelnen Testläufe in einer Textdatei
+protokolliert, um diese später statistisch auswerten zu können.
+
+\lstinputlisting[language=Matlab, lastline=1]{Code/testTsp.m}
+
+\noindent Das Argument \emph{name} bezeichnet den Parameter, welcher mit
+unterschiedlichen Werten getestet werden soll, welche in Form einer Liste als
+\emph{values} übergeben werden.
+Um für die statistische Auswertung einen guten Mittelwert und eine plausible
+Aussage über die Standardabweichung treffen zu können, lässt sich mittels
+\emph{runs} die Anzahl der Testläufe pro Wert spezifizieren.
+Falls die Funktion {\tt tsp()} wie oben beschrieben mit weiteren Schlüssel-Wert-Paaren
+parametrisiert werden muss, geschieht dies über den \emph{varargin}-Mechanismus,
+welcher es beim Aufruf von {\tt testTsp()} erlaubt, beliebig viele Argumente zu
+definieren und diese automatisch in eine Liste umwandelt. So sind Aufrufe in der
+folgenden Form möglich:
+
+\begin{lstlisting}[language=Matlab]
+testTsp('Key1', {0, 1, 2}, 10, 'Key2', value2, 'Key3', value3);
+\end{lstlisting}
+
+\noindent Im folgenden Abschnitt ist der Ablauf des Tests mit Aufruf von
+{\tt tsp()} inklusive einer Zeitmessung in gekürzter Form dargestellt:
+
+\lstinputlisting[language=Matlab, firstnumber=8, linerange={8-8,11-12,14-18,34-35}]{Code/testTsp.m}
+
+\noindent Zum Speichern der Ergebnisse dienen die folgenden Zeilen Code.
+Der Dateiname wird aus dem Parameternamen und dem Wert zusammengesetzt. Um für
+bestimmte Tests eine Eindeutigkeit zu gewährleisten, lässt sich zudem über eine ungerade
+Anzahl an Argumenten in \emph{varargin} eine zusätzliche Zeichenkette in den
+Dateinamen einfügen (es wird das letzte Element der Liste verwendet).
+Gespeichert wird neben den Kosten des kürzesten Weges der kürzeste Weg selbst
+und die vom evolutionären Algorithmus benötigte Zeit.
+
+\lstinputlisting[language=Matlab, firstnumber=21, firstline=21, lastline=33]{Code/testTsp.m}
+
+
+\paragraph{suite.m} ist ein Matlab-Skript und enthält alle durchzuführenden Tests
+als Aufrufe der Funktion {\tt testTsp()}. Die einzelnen Aufrufe werden zum Teil
+in den folgenden Kapiteln dargestellt.
+
+
+\paragraph{stats.py} ist ein Python-Skript, welches die von der Funktion
+{\tt testTsp()} generierten Dateien einliest und Mittelwert und Standardabweichung
+über die verschiedenen Testläufe berechnet.
+Das Skript generiert zu jedem Parameter direkt eine \LaTeX-Tabelle mit den
+zugehörigen Werten, welche in den folgenden Kapiteln direkt eingefügt sind.
+
