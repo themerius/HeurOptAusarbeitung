@@ -13,7 +13,7 @@
     ItalicFont={Source Sans Pro Light Italic},
     BoldFont={Source Sans Pro},
     BoldItalicFont={Source Sans Pro Italic}]{Source Sans Pro Light}
-  \setmonofont[Mapping=tex-text]{Source Code Pro Light}
+  \setmonofont[Mapping=tex-text, Scale=0.85]{Source Code Pro ExtraLight}
   \usepackage{microtype}
 
 % Language
@@ -27,8 +27,8 @@
   \hyphenpenalty=0
   \hbadness=0
 
-% Biblography Style
-  \usepackage{bibgerm}
+% Biblography Style: \citet{}, \citep[][]{}
+  \usepackage{natbib}  % Info: http://merkel.zoneo.net/Latex/natbib.php
 
 % Colors
   \usepackage[svgnames]{xcolor}

@@ -39,6 +39,21 @@ Formatting fonts:
     \emph{Kursiv}
     {\tt Typewriter}
 
+Quotes:
+
+    Inline (German): „inline Zitat“
+
+    \begin{quote}
+      Zitierter Text.
+    \end{quote}
+
+    http://merkel.zoneo.net/Latex/natbib.php
+    http://www.ctan.org/tex-archive/biblio/bibtex/contrib/german/din1505
+
+    \citep[siehe][S.~15]{default}
+    \citep{default}
+    \citet{default}
+
 Formatting Lists:
 
     \begin{itemize}
