@@ -37,7 +37,7 @@ Cheat Sheet
 Formatting fonts:
 
     \emph{Kursiv}
-    \tt{Typewriter}
+    {\tt Typewriter}
 
 Formatting Lists:
 
