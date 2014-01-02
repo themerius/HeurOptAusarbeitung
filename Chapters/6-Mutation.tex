@@ -11,9 +11,28 @@ Beschreibung
 \paragraph{Ergebnisse}
 vs \emph{mutswap}
 
+Mutationsrate bei allen 3 verschiedenen Verfahren jeweils verändert.
+
+\lstinputlisting[language=Matlab, firstline=43, lastline=50]{Code/suite.m}
+
 \input{Chapters/gen/Mutation.Rate.mutmove}
 
 \input{Chapters/gen/Mutation.Rate.mutinvert}
 
 \input{Chapters/gen/Mutation.Rate.mutswap}
+
+\begin{figure}[!h]
+\minipage{0.32\textwidth}
+  \includegraphics[width=\linewidth]{Figures/gen/Mutation.Rate.mutmove.png}
+  \caption{mutmove}\label{fig:mutmove}
+\endminipage\hfill
+\minipage{0.32\textwidth}
+  \includegraphics[width=\linewidth]{Figures/gen/Mutation.Rate.mutinvert.png}
+  \caption{mutinvert}\label{fig:mutinvert}
+\endminipage\hfill
+\minipage{0.32\textwidth}%
+  \includegraphics[width=\linewidth]{Figures/gen/Mutation.Rate.mutswap.png}
+  \caption{mutswap}\label{fig:mutswap}
+\endminipage
+\end{figure}
 

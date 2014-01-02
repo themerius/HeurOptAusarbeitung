@@ -6,16 +6,12 @@ import os
 import sys
 import warnings
 
-def getPath(to):
-    path = os.path.split(os.path.abspath(__file__))
-    path = os.path.abspath(path[0])
-    path = path + "/" + to
-    return path
+from functions import getPath, makeDir, parseValue, generateFigure
 
-dir = getPath("../Chapters/gen/")
-
-if not os.path.exists(dir):
-    os.makedirs(dir)
+texDir = getPath("../Chapters/gen/")
+figDir = getPath("../Figures/gen/")
+makeDir(texDir)
+makeDir(figDir)
 
 results = getPath(to="results")
 
@@ -29,15 +25,6 @@ class Result(object):
         self.min    = numpy.min(objectiveValues)
         self.max    = numpy.max(objectiveValues)
         self.time   = -1
-
-def parseValue(valueStr):
-    try:
-        return int(valueStr)
-    except:
-        try:
-            return float(valueStr)
-        except:
-            return valueStr # keep the string
 
 def stat(dir, filename):
     data = numpy.loadtxt(os.path.join(dir, filename))
@@ -60,7 +47,6 @@ def stat(dir, filename):
     value = parseValue(value.replace('.txt', ''))
     stats[varname][value] = obj
 
-
 for root, dirs, files in os.walk(results):
     for file in files:
         if file.endswith(".txt"):
@@ -76,7 +62,7 @@ def print_table():
 
 def save_TeXtable():
     for varname, list in sorted(stats.items()):
-        with open(dir + varname.replace('_', '.') + '.tex', 'w') as f:
+        with open(texDir + varname.replace('_', '.') + '.tex', 'w') as f:
             f.write((u"""%% %s
 \\begin{table}[tbph]
 \\begin{tabular}{ | c || r | r | r | r | r | }
@@ -93,9 +79,30 @@ Parameter & \# Iterationen & Mittelwert & Std.-Abw. & Laufzeit & Min, Max \\\\
 \\caption{%s}\\label{%s}
 \\end{table}""" % (varname.replace('_', ' '), varname.replace('_', '.')))
 
+def generateFigures():
+    for varname, list in sorted(stats.items()):
+        x = []
+        y1 = []
+        y2 = []
+
+        for value, obj in sorted(list.items()):
+            x.append(value)
+            y1.append(obj.mean)
+            y2.append(obj.time)
+
+        values = [y1]
+        legend = None
+
+        if varname.startswith('Number'):
+            values = [y1, y2]
+            legend = ['Mean', 'Duration']
+
+        generateFigure(x, values, figDir + varname.replace('_', '.') + '.png', legend)
+
 if __name__ == "__main__":
     if "tex" in sys.argv:
         save_TeXtable()
+        generateFigures()
     else:
         print_table()
 

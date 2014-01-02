@@ -26,6 +26,7 @@ _build/
 *.out
 *.pdfsync
 *.ps
+*.pyc
 *.snm
 *.synctex.gz
 *.tex~

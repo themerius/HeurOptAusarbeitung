@@ -3,12 +3,10 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-import os
+from functions import makeDir
 
 dir = "Figures/gen/"
-
-if not os.path.exists(dir):
-    os.makedirs(dir)
+makeDir(dir)
 
 # example data
 x = np.arange(15) + 1
