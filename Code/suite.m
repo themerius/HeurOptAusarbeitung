@@ -36,7 +36,8 @@ testTsp('Selection.Name', ...
 
 
 % Recombination
-% TODO
+testTsp('Recombination.Name', ...
+    {'recpm', 'recox'}, runs);
 
 
 % Mutation
