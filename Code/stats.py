@@ -19,6 +19,7 @@ stats = {}
 
 class Result(object):
     def __init__(self, objectiveValues):
+        self.values = objectiveValues
         self.number = objectiveValues.shape[0]
         self.mean   = numpy.mean(objectiveValues)
         self.std    = numpy.std(objectiveValues)
@@ -40,16 +41,21 @@ def stat(dir, filename):
             obj.time = numpy.sum(timedata) / timedata.size
 
     # add object to statistic list
-    (varname, value) = filename.rsplit('_', 1)
+    if "_" in filename:
+        (varname, value) = filename.rsplit('_', 1)
+        value = parseValue(value.replace('.txt', ''))
+    else:
+        varname = filename.replace('.txt', '')
+        value = -1
+
     if varname not in stats:
         stats[varname] = {}
 
-    value = parseValue(value.replace('.txt', ''))
     stats[varname][value] = obj
 
 for root, dirs, files in os.walk(results):
     for file in files:
-        if file.endswith(".txt") and "_" in file:
+        if file.endswith(".txt"):
             stat(root, file)
 
 def print_table():
@@ -57,8 +63,9 @@ def print_table():
         print '\n' + varname
 
         for value, obj in sorted(list.items()):
+            printVal = str(value) if value != -1 else "-"
             print "%8s: %3d %7.2f %7.2f %7.2f (%d, %d)" % \
-                (str(value), obj.number, obj.mean, obj.std, obj.time, obj.min, obj.max)
+                (printVal, obj.number, obj.mean, obj.std, obj.time, obj.min, obj.max)
 
 def save_TeXtable():
     for varname, list in sorted(stats.items()):
@@ -71,8 +78,9 @@ Parameter & \# Iterationen & Mittelwert & Std.-Abw. & Laufzeit & Min, Max \\\\
 \\hline\n""" % varname).encode('utf-8'))
 
             for value, obj in sorted(list.items()):
+                printVal = str(value) if value != -1 else "-"
                 f.write("%8s & %3d & %7.2f & %7.2f & %7.2f & %d, %d \\\\\n" % \
-                    (str(value), obj.number, obj.mean, obj.std, obj.time, obj.min, obj.max))
+                    (printVal, obj.number, obj.mean, obj.std, obj.time, obj.min, obj.max))
 
             f.write("""\\hline
 \\end{tabular}
@@ -85,10 +93,15 @@ def generateFigures():
         y1 = []
         y2 = []
 
-        for value, obj in sorted(list.items()):
-            x.append(value)
-            y1.append(obj.mean)
-            y2.append(obj.time)
+        if len(list) == 1 and list.keys()[0] == -1:
+            obj = list[-1]
+            x = numpy.arange(obj.number) + 1
+            y1 = obj.values
+        else:
+            for value, obj in sorted(list.items()):
+                x.append(value)
+                y1.append(obj.mean)
+                y2.append(obj.time)
 
         values = [y1]
         legend = None
