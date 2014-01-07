@@ -49,7 +49,7 @@ def stat(dir, filename):
 
 for root, dirs, files in os.walk(results):
     for file in files:
-        if file.endswith(".txt"):
+        if file.endswith(".txt") and "_" in file:
             stat(root, file)
 
 def print_table():
