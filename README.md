@@ -10,6 +10,7 @@ You should have installed Adobe's OpenSource Fonts:
 You can also use other fonts, but this must be configured!
 
 On Ubuntu/Debian the following packages should be installed:
+
   * texlive
   * texlive-bibtex-extra
   * texlive-lang-german
