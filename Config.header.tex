@@ -13,14 +13,22 @@
     ItalicFont={Source Sans Pro Light Italic},
     BoldFont={Source Sans Pro},
     BoldItalicFont={Source Sans Pro Italic}]{Source Sans Pro Light}
-  \setmonofont[Mapping=tex-text]{Source Code Pro Light}
+  \setmonofont[Mapping=tex-text, Scale=0.85]{Source Code Pro ExtraLight}
+  \usepackage{microtype}
 
 % Language
-  \usepackage[german]{babel}
-  \selectlanguage{german}
+  \usepackage{polyglossia}
+  \setdefaultlanguage[latesthyphen=true, babelshorthands=true]{german}
+  \setotherlanguage{english}
 
-% Biblography Style
-  \usepackage{bibgerm}
+% Hyphenation
+  \tolerance=0
+  \emergencystretch=\maxdimen
+  \hyphenpenalty=0
+  \hbadness=0
+
+% Biblography Style: \citet{}, \citep[][]{}
+  \usepackage{natbib}  % Info: http://merkel.zoneo.net/Latex/natbib.php
 
 % Colors
   \usepackage[svgnames]{xcolor}
@@ -30,6 +38,9 @@
 
 % For macro: \url{}
   \usepackage[hyphens]{url}
+
+% Caption options (left align)
+  \usepackage[justification=justified,singlelinecheck=false]{caption}
 
 % PDF with Links
   \usepackage[
