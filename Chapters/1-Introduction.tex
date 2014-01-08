@@ -1,12 +1,45 @@
 \section{Einleitung}
 
-Ein Zitat ohne Klammern \citet{default}.
-Mit Seitenangabe \citep[siehe][S.~15]{default}.
-TODO
+In dieser Ausarbeitung geht es um die Lösung eines konkreten
+\emph{Travelling Salesman Problems} (TSP).
 
 \begin{quote}
-Zitierter Text.
+Das Problem des Handlungsreisenden (auch Rundreiseproblem, engl. Traveling Salesman Problem oder Traveling Salesperson Problem (TSP)) ist ein kombinatorisches Optimierungsproblem des Operations Research und der theoretischen Informatik. Die Aufgabe besteht darin, eine Reihenfolge für den Besuch mehrerer Orte so zu wählen, dass die gesamte Reisestrecke des Handlungsreisenden nach der Rückkehr zum Ausgangsort möglichst kurz ist. \citep{wikiTsp}
 \end{quote}
+
+\noindent Da dieses Problem NP-vollständig ist, lässt es sich nur mit
+expotentiellem Zeitaufwand lösen.
+Dies ist für kleine Mengen an Orten noch machbar, aber für eine große
+Menge an Orten wird der Zeitrahmen schnell gesprengt.
+
+5 Orte entspricht $5! = 120$ mögliche Reisestrecken
+29 Orte entspricht $29! = 8 \cdot 10^{30}$ mögliche Reisestrecken
+
+Bei einem Rechner der 100.000 Berechnungen der Länge der Reisestrecken pro
+Sekunde schafft bedeutet das im Fall von 5 Orten hätte er in ca. 1 ms
+herausgefunden welche die kürzeste Strecke ist.
+Bei 29 Städten brächte der Rechner ca. $8 \cdot 10^{16}$ Jahre\footnote{Das Universum ist
+kanpp $13,7 \cdot 10^{9}$ Jahre alt. \citep[siehe][]{wikiUniversum}}!
+
+Mit Hilfe heuristischer Optimierungsverfahren kann dieses Problem
+jedoch in angemessener Zeit gelöst werden.
+
+TODO Heuristische Optimierungsverfahren beschreiben
+
+
+Dieses Dokument ist wärend des Wintersemesters 2013/2014 als das Ergebnis
+der Aufgabenstellung aus Vorlesung der
+\emph{Heuristische Optimierungsverfahren} entstanden.
+Die Aufgabe bestand darin „einen evolutionären Algorithmus zur Lösung von
+Travelling Salesman Problems (TSP)“ mit der Softwarebibliothek GEATbx zu entwickeln.
+Der Hauptteil besteht darin „einige der [...] Parameterwerte und Optionen“ zu
+modifizieren „und die Auswirkungen solcher Änderungen auf die Güte des Algorithmus“
+zu untersuchen.
+Dabei ist das Ziel den Algoirthmus so zu konfigurieren, dass er
+„möglichst gute Lösungen in möglichst kurzer Zeit ermittelt.“ \citep[Aus][]{aufg}
+
+TODO Genetische Algorithmen
+
 
 \section{Datenformat}
 
