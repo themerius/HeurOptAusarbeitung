@@ -5,7 +5,7 @@ CHAPTER = Chapters/
 TITLEPAGES = Titlepages/
 FIGURES = Figures/
 BUILDPATH = _build/
-BUILDNAME = HeurOptAusarbeitung_M.Bumiller-S.Hodapp_2013
+BUILDNAME = HeurOptAusarbeitung_M.Bumiller-S.Hodapp_2014
 
 pdf:
 	$(MAKE) gen
