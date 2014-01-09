@@ -4,41 +4,60 @@ In dieser Ausarbeitung geht es um die Lösung eines konkreten
 \emph{Travelling Salesman Problems} (TSP).
 
 \begin{quote}
-Das Problem des Handlungsreisenden (auch Rundreiseproblem, engl. Traveling Salesman Problem oder Traveling Salesperson Problem (TSP)) ist ein kombinatorisches Optimierungsproblem des Operations Research und der theoretischen Informatik. Die Aufgabe besteht darin, eine Reihenfolge für den Besuch mehrerer Orte so zu wählen, dass die gesamte Reisestrecke des Handlungsreisenden nach der Rückkehr zum Ausgangsort möglichst kurz ist. \citep{wikiTsp}
+Das Problem des Handlungsreisenden (auch Rundreiseproblem, engl.
+Traveling Salesman Problem oder Traveling Salesperson Problem (TSP))
+ist ein kombinatorisches Optimierungsproblem des Operations Research und
+der theoretischen Informatik. Die Aufgabe besteht darin, eine Reihenfolge
+für den Besuch mehrerer Orte so zu wählen, dass die gesamte Reisestrecke
+des Handlungsreisenden nach der Rückkehr zum Ausgangsort möglichst
+kurz ist. \citep{wikiTsp}
 \end{quote}
 
 \noindent Da dieses Problem NP-vollständig ist, lässt es sich nur mit
 expotentiellem Zeitaufwand lösen.
 Dies ist für kleine Mengen an Orten noch machbar, aber für eine große
 Menge an Orten wird der Zeitrahmen schnell gesprengt.
+Beispiel:
 
-5 Orte entspricht $5! = 120$ mögliche Reisestrecken
-29 Orte entspricht $29! = 8 \cdot 10^{30}$ mögliche Reisestrecken
+\begin{itemize}
+  \item 5 Orte entsprechen $5! = 120$ mögliche Reisestrecken.
+  \item 29 Orte entsprechen $29! \doteq 9 \cdot 10^{30}$ mögliche Reisestrecken.
+\end{itemize}
 
-Bei einem Rechner der 100.000 Berechnungen der Länge der Reisestrecken pro
-Sekunde schafft bedeutet das im Fall von 5 Orten hätte er in ca. 1 ms
-herausgefunden welche die kürzeste Strecke ist.
-Bei 29 Städten brächte der Rechner ca. $8 \cdot 10^{16}$
+\noindent Bei einem Rechner der 100.000 Berechnungen der Reisestreckenlänge pro
+Sekunde schafft bedeutet das im Fall von 5 Orten eine Rechenzeit
+von ca. 1 ms, um herausgefunden welche die kürzeste Strecke ist.
+Bei 29 Städten bräuchte dieser Rechner ca. $9 \cdot 10^{16}$
 Jahre\footnote{Das Universum ist
 kanpp $13,7 \cdot 10^{9}$ Jahre alt. \citep[siehe][]{wikiUniversum}}!
-
+Das macht es quasi unmöglich das TSP Problem mit einer naiven Implementierung
+in angemessener Rechenzeit zu lösen.
 Mit Hilfe heuristischer Optimierungsverfahren kann dieses Problem
-jedoch in angemessener Zeit gelöst werden.
+jedoch troztdem in angemessener Zeit gelöst werden. Hier eine Definition
+von \citep{fink}:
 
 \begin{quote}
-Heuristische Optimierungsverfahren sind universell einsetzbare Verfahren, welche mit realitätsverträglichem Rechenaufwand hochwertige Lösungen ermitteln und damit zur effektiven Bewältigung realer Entscheidungsprobleme beitragen können. \citep[S.1]{fink}
+Heuristische Optimierungsverfahren sind universell einsetzbare Verfahren,
+welche mit realitätsverträglichem Rechenaufwand hochwertige Lösungen
+ermitteln und damit zur effektiven Bewältigung realer Entscheidungsprobleme
+beitragen können. \citep[S.~1]{fink}
 \end{quote}
 
 \begin{quote}
-Ausgehend von einem entwickelten wohlstrukturierten Problemmodell sind Optimierungsverfahren erforderlich, welche die Auswahl aus der Menge der Handlungsalternativen (im Sinne von möglichen Lösungen/Plänen) automatisch vornehmen oder unterstützen. \citep[S.3]{fink}
+Ausgehend von einem entwickelten wohlstrukturierten Problemmodell sind 
+Optimierungsverfahren erforderlich, welche die Auswahl aus der Menge der 
+Handlungsalternativen (im Sinne von möglichen Lösungen/Plänen) automatisch
+vornehmen oder unterstützen. \citep[S.~3]{fink}
 \end{quote}
 
 \begin{quote}
-Heuristiken sind auf Erfahrung [...] beruhende Vorgehensweisen zur Suche nach guten, aber nicht notwendigerweise optimalen Lösungen [...] für bestimmte Planungsprobleme. \citep[S.4]{fink}
+Heuristiken sind auf Erfahrung [...] beruhende Vorgehensweisen zur
+Suche nach guten, aber nicht notwendigerweise optimalen Lösungen
+[...] für bestimmte Planungsprobleme. \citep[S.~4]{fink}
 \end{quote}
 
-Dieses Dokument ist wärend des Wintersemesters 2013/2014 als das Ergebnis
-der Aufgabenstellung aus Vorlesung der
+\noindent Dieses Dokument ist wärend des Wintersemesters 2013/2014 als das
+Ergebnis der Aufgabenstellung aus Vorlesung der
 \emph{Heuristische Optimierungsverfahren} entstanden.
 Die Aufgabe bestand darin „einen evolutionären Algorithmus zur Lösung von
 Travelling Salesman Problems (TSP)“ mit der Softwarebibliothek GEATbx zu entwickeln.
@@ -48,18 +67,49 @@ zu untersuchen.
 Dabei ist das Ziel den Algoirthmus so zu konfigurieren, dass er
 „möglichst gute Lösungen in möglichst kurzer Zeit ermittelt.“ \citep[Aus][]{aufg}
 
-Genetische bzw. evolutionäre Algorithmen wurden maßgeblich von Teams
+Genetische bzw. evolutionäre Algorithmen wurden maßgeblich von den Teams
 John von Holland, K. A. De Jong (Universität Michigan) und
 Ingo Rechenberg, Hans P. Schwefel (TU Berlin) unabhängig voneinander erdacht.
 \citep[Vgl.][]{erben}
 
 \begin{quote}
-[Die] gemeinsame[n] Grundlagen [von evolutionären Algorithmen] liegen in der Kodierung möglicher Lösungen als Zeichenketten und der primären Anwendung von Rekombinationsoperatoren auf eine Menge (Population) von möglichen Lösungen (Individuen). Derartige Verfahren imitieren damit die Prinzipien der natürlichen Evolution, bei der die Eigenschaften eines Individuums durch Chromosome kodiert werden, mit Hilfe von Rekombinationsoperatoren neue Individuen erzeugt werden und das Überleben bzw. Fortpflanzen von Individuen durch Selektionsprozesse in Abhängigkeit von deren „Fitness“ gesteuert wird. \citep[S.6]{fink}
+[Die] gemeinsame[n] Grundlagen [von evolutionären Algorithmen] liegen in der
+Kodierung möglicher Lösungen als Zeichenketten und der primären Anwendung von
+Rekombinationsoperatoren auf eine Menge (Population) von möglichen Lösungen
+(Individuen). Derartige Verfahren imitieren damit die Prinzipien der
+natürlichen Evolution, bei der die Eigenschaften eines Individuums durch
+Chromosome kodiert werden, mit Hilfe von Rekombinationsoperatoren neue
+Individuen erzeugt werden und das Überleben bzw. Fortpflanzen von Individuen
+durch Selektionsprozesse in Abhängigkeit von deren
+„Fitness“ gesteuert wird. \citep[S.~6]{fink}
 \end{quote}
 
-TODO Übersicht über das Dokument / Dokumentenaufbau
+\noindent Das Dokument ist vom Aufbau her der Aufgabenstellung nachempfunden.
+Zunächst wird das Datenformat der Datei in der die Orte definiert sind
+beschrieben, darauf folgen einige Testläufe und deren Ergebnisse mit
+den voreingestellten Parametern.
+Im Kapitel \ref{sec.param} werden die möglichen Parameter und ihre
+Auswirkungen beschrieben.
+Um die bestmöglichen Parameter herauszufinden, wurde ein automatisiertes
+Testsystem geschaffen. Der Aufbau des Testsystems wird in Kapitel
+\ref{testsystem} genauer beschrieben.
+In den Kapiteln \ref{populations} bis \ref{mutation} werden die Ergebnisse
+präsentiert und diskutiert, darauf folgt eine Zusammenfassung in der
+die idealen Parameter zusammengeführt werden, um das finale und
+ideale Ergebnis zu finden.
 
-TODO Mehr Subsections!
+Die Auswertung der Ergebnisse wurde mit Hilfe von einigen selbstgeschriebenen
+Python-Skripten soweit automatisiert, dass ein beträchtlicher Teil des
+Dokuments gänzlich automatisch und konsistent generiert werden kann.
+Sämtliche Tabellen sowie die zugehörigen Diagramme sind auf diese Art
+generiert worden.
+Das bedeutet, wenn der Auswertungsserver neue Resultate an das
+Repositorium übergibt, werden diese beim nächsten Bauen des PDFs
+direkt als ausgewertete Tabelle mit Diagramm dargestellt.
+Sämtlicher MATLAB- (Simulation), Python- (Auswertung) und LaTeX-Code (Dokument)
+ist im Git-Repositorium \emph{HeurOptAusarbeitung}\footnote{
+\url{GitHub Link: https://github.com/themerius/HeurOptAusarbeitung}} auf GitHub
+zu finden. 
 
 
 \section{Datenformat}
@@ -129,7 +179,7 @@ gesucht, um einen möglichst kurzen Weg mit möglichst geringer Laufzeit zu find
 \end{figure}
 
 
-\section{Parameter und Optionen}
+\section{Parameter und Optionen}\label{sec.param}
 
 Mit der Methode {\tt geaoptset( Key, Value )} können beliebig viele
 Parameter an den evolutionären Algorithmus übergeben\footnote{Natürlich
