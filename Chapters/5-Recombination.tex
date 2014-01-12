@@ -1,12 +1,21 @@
 \section{Rekombination}\label{recombination}
 
+Die Rekombination kreiert neue Chromosome durch eine Kombination zweier zufällig
+ausgewählter bereits existierender Chromosome. Dies entspricht der normalen
+Fortpflanzung in der Biologie.
+Das in \emph{GEATbx} enthaltene \emph{Partially matched Crossover} Verfahren
+wird im Folgenden mit dem \emph{Order Crossover} von Lawrence Davis verglichen.
+
 % http://www.geatbx.com/docu/options-03.html
 % http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.61.6575&rep=rep1&type=pdf
 % http://chern.ie.nthu.edu.tw/alg2003/chap-8-9.pdf
 % http://siebn.de/download/GenetischeAlgorithmen.pdf
 
-\subsection{Order Crossover (OX)} von L. Davis
-Beschreibung
+\subsection{Order Crossover (OX)}
+Dieses von Lawrence Davis in \citep{ox} beschriebene Verfahren ist nicht im
+Umfang von \emph{GEATbx} enthalten und muss daher selbst implementiert werden.
+
+Beschreibung und Implementierung % TODO Code
 
 \begin{figure}[h!]
   \centering
@@ -16,6 +25,7 @@ Beschreibung
 
 
 \subsection{Partially matched Crossover (recpm)}
+Beschreibung \citep{erben} % TODO
 
 \begin{figure}[h!]
   \centering
@@ -26,6 +36,7 @@ Beschreibung
 
 \subsection{Ergebnisse}
 
+% TODO
 \input{Chapters/gen/Recombination.Name}
 Entscheidung: recox
 
