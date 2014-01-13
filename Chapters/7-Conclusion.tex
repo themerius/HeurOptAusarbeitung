@@ -17,9 +17,15 @@ Die folgenden Parameter sind laut unseren Messungen ideal: \\
 
 \noindent Wenn das Skript mit diesen von uns als ideal betrachteten
 Parametern inizialisiert wird, erhalten wir in einigen Iterationen
-das \emph{ideale Ergebnis von 2,020 Kilometern} der Rundreisestrecke.
+das \emph{ideale Ergebnis von 2020 Kilometern} der Rundreisestrecke.
 Siehe dazu Tabelle \ref{tspOpt} und das zugehörige Diagramm
 auf Abbildung \ref{fig.tspOpt}.
+Auf Abbildung \ref{fig.optPath} ist zudem die Visualisierung des
+Reiseweges durch die 29 größten bayrischen Städte zu sehen.
+\emph{Anmerkung:} Dieser beste Weg kann in verschiedenen Permutationen kodiert sein,
+unsere Simulation hat u.a. diese Permutation gefunden:
+
+\noindent $3 \rightarrow 29 \rightarrow 26  \rightarrow 5 \rightarrow  9 \rightarrow 12 \rightarrow  6 \rightarrow 28 \rightarrow  1 \rightarrow 21 \rightarrow 13 \rightarrow 16 \rightarrow 24 \rightarrow  8 \rightarrow 27 \rightarrow 23 \rightarrow  7 \rightarrow 25 \rightarrow 19 \rightarrow 11 \rightarrow 22 \rightarrow 14 \rightarrow 17 \rightarrow 18 \rightarrow 15 \rightarrow  4 \rightarrow 10 \rightarrow 20 \rightarrow  2$
 
 \input{Chapters/gen/tspOpt}
 
@@ -27,6 +33,12 @@ auf Abbildung \ref{fig.tspOpt}.
   \centering
   \includegraphics[width=1.0\textwidth]{Figures/gen/tspOpt.png}
   \caption{Ergebnisse mit der endgültigen Konfiguration}\label{fig.tspOpt}
+\end{figure}
+
+\begin{figure}[!h] \centering
+  \includegraphics[width=1.0\textwidth]{Figures/path.pdf}
+  \caption{Visualisierung des kürzesten Weges (2020km).}
+  \label{fig.optPath}
 \end{figure}
 
 

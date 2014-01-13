@@ -37,7 +37,7 @@ Um dies zu vereinfachen, sind in Abbildung \ref{fig.numberindividuals} die
 mittleren Wegkosten und die Laufzeit dargestellt. Es ist ersichtlich, dass die
 Kosten in Form einer Hyperbel abnehmen, bei kleinen Populationen ändern sie sich
 noch sehr stark, je größer die Population wird, desto weniger verkürzt sich der
-gefundene Weg. Als "'optimalen"' Wert für die endgültige Parametrisierung bietet
+gefundene Weg. Als „optimalen“ Wert für die endgültige Parametrisierung bietet
 sich eine Größe von 100 Individuen an, da dort die Kosten-Kurve ihre größte
 Krümmung aufweist und auch die Laufzeit noch in einem erträglichen Maße bleibt.
 
@@ -46,11 +46,15 @@ Krümmung aufweist und auch die Laufzeit noch in einem erträglichen Maße bleib
 Die Population aller Individuen
 lässt sich wie oben beschrieben auf mehrere Unterpopulationen aufteilen.
 Wird nur eine Unterpopulation spezifiziert, wird die gesamte Population als
-eine panmiktische Population betrachtet. Werden hingegen mehrere Unterpopulationen
+eine \emph{panmiktische Population}\footnote{„Wenn sich jedes Individuum
+einer Population mit jedem des anderen Geschlechtes mit gleicher
+Wahrscheinlichkeit paart, dann nennt man diesen Idealfall Panmixie.“
+(Aus \url{http://de.wikipedia.org/wiki/Panmixie})} betrachtet.
+Werden hingegen mehrere Unterpopulationen
 verwendet, entspricht dies bildlich mehreren Indianerstämmen, welche nebeneinander
 existieren, aber sich auch hin und wieder Individuen stammesübergreifend paaren.
 Diese stammesübergreifende Kombination wird bei den evolutionären Algorithmen
-mit dem Begriff der Migration bezeichnet.
+mit dem Begriff der \emph{Migration} bezeichnet.
 
 \input{Chapters/gen/NumberSubpopulation}
 
@@ -109,7 +113,7 @@ exportiert werden und gleich viele Individuen daraus wieder importiert werden.
 
 \noindent Tabelle \ref{Migration.Rate} enthält die Ergebnisse zu den Testläufen.
 Um eine bessere Übersicht über die verschiedenen Mittelwerte zu erhalten, sind
-diese in Abbildung \ref{fig.migrationrate} dargestellt. Der "'optimale"' Wert
+diese in Abbildung \ref{fig.migrationrate} dargestellt. Der „optimale“ Wert
 ist das Minimum der Kosten bei der Migrationsrate von 0.25.
 
 
