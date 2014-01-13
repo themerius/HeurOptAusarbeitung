@@ -1,8 +1,4 @@
-\section{Zusammenfassung}\label{conclusion}
-
-TODO: optimale Einstellungen von Operatoren und Parameterwerten
-
-\subsection{Ideale Parameter}
+\section{Optimale Parameter}
 
 Die folgenden Parameter sind laut unseren Messungen ideal: \\
 
@@ -16,10 +12,14 @@ Die folgenden Parameter sind laut unseren Messungen ideal: \\
   Selection.Name      & = & seltour   \\
   Recombination.Name  & = & recox     \\
   Mutation.Name       & = & mutmove   \\
-  Mutation.Rate       & = & 1.25
+  Mutation.Rate       & = & 1.25 \\\\
 \end{tabular}
 
-\subsection{Ideales Ergebnis}
+\noindent Wenn das Skript mit diesen von uns als ideal betrachteten
+Parametern inizialisiert wird, erhalten wir in einigen Iterationen
+das \emph{ideale Ergebnis von 2,020 Kilometern} der Rundreisestrecke.
+Siehe dazu Tabelle \ref{tspOpt} und das zugehörige Diagramm
+auf Abbildung \ref{fig.tspOpt}.
 
 \input{Chapters/gen/tspOpt}
 
@@ -29,3 +29,28 @@ Die folgenden Parameter sind laut unseren Messungen ideal: \\
   \caption{Ergebnisse mit der endgültigen Konfiguration}\label{fig.tspOpt}
 \end{figure}
 
+
+
+\section{Fazit}\label{conclusion}
+
+Wir konnten das Travelling Salesman Problem
+mit einem evolutionären Algorithmus effizient lösen
+und sogar das \emph{optimale} Ergebnis finden, obwohl heuristische
+Optimierungsverfahren nicht notwenigerweise die optimalste Lösung finden müssen
+(sondern nur annährend optimale Lösungen).
+
+Der Algorithmus liefert mit nicht optimierten Parametern eine Rundreisestrecke
+von 2764 km (Mimimum aus 15 Iterationen).
+Nach unseren Versuchen konnten wir optimale Parameter ausmachen und mit diesen
+das Skript laufen lassen: dort lag das Minimum bei 2020 km, was laut Aufgabenstellung
+die optimale Lösung darstellt.
+Es sei angemerkt, dass nicht jede Iteration das optimale Ergebnis findet,
+jedoch nach insgesamt 25 Iterationen konnten drei Iterationen das optimale
+Ergebnis liefern und im Mittelwert lag das Ergebnis bei 2124 km,
+also immer sehr nah an der idealen Lösung.
+
+Unser Testsystem war so aufgebaut, dass es die einzelnen Simulationsiterationen
+in Textdateien loggt, danach hat ein Pythonskript die Auswertung vorgenommen und
+Tabellen sowie Diagramme für dieses LaTeX-Dokument generiert.
+Dadurch war viel automatisiert, was den Autoren die Gewissheit gibt, immer die
+aktuellsten Simulationsergebnisse konsistent im Dokument zu haben.
