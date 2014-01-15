@@ -12,9 +12,9 @@ pro Population. Genau genommen, ist hier die Anzahl pro Unterpopulation
 (subpopulation) gemeint. Sollten mehrere Unterpopulationen verwendet werden,
 exisitiert im Gesamten ein Mehrfaches der Populationsgröße an Individuen.
 Der folgende Code-Ausschnitt enthält den Aufruf der {\tt testTsp()}-Funktion um
-Populationsgrößen von 10 bis 1500 Individuen zu untersuchen.
+Populationsgrößen von zehn bis 1500 Individuen zu untersuchen.
 
-\lstinputlisting[language=Matlab, firstline=6, lastline=7]{Code/suite.m}
+\lstinputlisting[language=MATLAB, firstline=6, lastline=7]{Code/suite.m}
 
 \input{Chapters/gen/NumberIndividuals}
 
@@ -72,7 +72,7 @@ ein Kompromiss gefunden werden muss.
 Wie in Abbildung \ref{fig.numbersubpopulation} ersichtlich, verläuft die
 Kosten-Kurve in ähnlicher Form zu derjenigen der Populationsgröße. Um die
 Laufzeit relativ gering zu halten, entscheiden wir uns für die weiteren Tests
-und die optimale Konfiguration für eine Anzahl von 5 Unterpopulationen, womit
+und die optimale Konfiguration für eine Anzahl von fünf Unterpopulationen, womit
 sich eine Gesamtpopulation von 500 Individuen ergibt.
 
 
@@ -90,7 +90,7 @@ Generation jeweils eine Migration durchgeführt werden soll. Je kleiner der Wert
 desto häufiger werden die verschiedenen Stämme kombiniert. Die Tabelle
 \ref{Migration.Interval} enthält die Ergebnisse zu den folgenden Tests:
 
-\lstinputlisting[language=Matlab, firstline=16, lastline=18]{Code/suite.m}
+\lstinputlisting[language=MATLAB, firstline=16, lastline=18]{Code/suite.m}
 \input{Chapters/gen/Migration.Interval}
 
 \noindent Die besten Ergebnisse erhält man, wenn bei jeder Generation eine
@@ -101,7 +101,7 @@ endgültige Parametrisierung gewählt.
 
 Die Migrationsrate (Migration.Rate) definiert den Anteil jeder Population, welcher
 während einer Migration modifiziert wird. Der Wertebereich reicht von 0 bis 1,
-ein Wert von 0.2 bedeutet, das 20\% jeder Unterpopulation in den Migrationstopf
+ein Wert von 0.2 bedeutet, dass 20\% jeder Unterpopulation in den Migrationstopf
 exportiert werden und gleich viele Individuen daraus wieder importiert werden.
 
 \input{Chapters/gen/Migration.Rate}

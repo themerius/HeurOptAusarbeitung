@@ -18,10 +18,11 @@ Die Funktionsweise des Algorithmus wird im Folgenden schrittweise erklärt, wobe
 die entsprechenden Codezeilen unserer Implementierung aus {\tt recox.m}
 jeweils gelistet sind.
 
-\newcommand{\recox}[2]{\lstinputlisting[language=Matlab, firstnumber=#1, firstline=#1, lastline=#2]{Code/recox.m}}
+\newcommand{\recox}[2]{\lstinputlisting[language=MATLAB, firstnumber=#1, firstline=#1, lastline=#2]{Code/recox.m}}
 
-Die Funktion {\tt recox()} erhält die existierende Sammlung an Individuen und
-die Rekombinationsrate übergeben und liefert eine neue Menge an Individuen mit
+Die Funktion {\tt recox()} bekommt als Parameter
+die existierende Sammlung an Individuen und die Rekombinationsrate übergeben.
+Sie liefert eine neue Menge an Individuen mit
 gleicher Anzahl zurück.
 Die neuen Chromosomen werden mit den bisherigen initialisiert, so dass die
 später nicht veränderten Individuen der Menge bereits die richtigen Werte

@@ -10,10 +10,10 @@ und deren Ergebnisse werden in den darauffolgenden Kapiteln präsentiert und
 analysiert.
 
 Neben dem \emph{GEATbx}-Framework besteht das automatisierte Testsystem aus den
-folgenden drei Matlab-Funktionen beziehungsweise -Skripten.
+folgenden drei MATLAB-Funktionen beziehungsweise -Skripten.
 
 
-\paragraph{tsp.m} enthält die Matlab-Funktion {\tt tsp()}, welche auf dem
+\paragraph{tsp.m} enthält die MATLAB-Funktion {\tt tsp()}, welche auf dem
 zur Verfügung gestellten Skript \emph{tspVorlage.m} basiert. Der folgende
 Codeabschnitt enthält die formale Schnittstelle der Funktion, wobei \emph{name}
 und \emph{value} den zu testenden Parameter des evolutionären Algorithmus mit
@@ -26,23 +26,23 @@ beliebig viele weitere Schlüssel-Wert-Paare an den Algorithmus übergibt.
 Die Rückgabewerte entsprechen exakt denen der Funktion {\tt geamain2()} des
 \emph{GEATbx}-Frameworks.
 
-\lstinputlisting[language=Matlab, lastline=1]{Code/tsp.m}
+\lstinputlisting[language=MATLAB, lastline=1]{Code/tsp.m}
 
 \noindent Die Initialisierung mit Default-Werten entspricht genau der Datei
 \emph{tspVorlage.m} mit dem Unterschied, dass der Dateiname fest auf „bays29“
 gesetzt ist. Vor dem Aufruf von {\tt geamain2()} werden schließlich die
 übergebenen Parameter in die GeaOpt-Struktur gesetzt:
-\lstinputlisting[language=Matlab, firstnumber=78, firstline=78, lastline=85]{Code/tsp.m}
+\lstinputlisting[language=MATLAB, firstnumber=78, firstline=78, lastline=85]{Code/tsp.m}
 
 
-\paragraph{testTsp.m} stellt ebenfalls eine Matlab-Funktion dar, welche
+\paragraph{testTsp.m} stellt ebenfalls eine MATLAB-Funktion dar, welche
 verschiedene Werte für einen Parameter des evolutionären Algorithmus durchtestet
 und die jeweiligen Ergebnisse der einzelnen Testläufe in einer Textdatei
 protokolliert, um diese später statistisch auswerten zu können.
 
-\lstinputlisting[language=Matlab, lastline=1]{Code/testTsp.m}
+\lstinputlisting[language=MATLAB, lastline=1]{Code/testTsp.m}
 
-\noindent Das Argument \emph{name} bezeichnet den Parameter, welcher mit
+\noindent Das Argument \emph{name} bezeichnet den Parameter, der mit
 unterschiedlichen Werten getestet werden soll, welche in Form einer Liste als
 \emph{values} übergeben werden.
 Um für die statistische Auswertung einen guten Mittelwert und eine plausible
@@ -54,14 +54,14 @@ welcher es beim Aufruf von {\tt testTsp()} erlaubt, beliebig viele Argumente zu
 definieren und diese automatisch in eine Liste umwandelt. So sind Aufrufe in der
 folgenden Form möglich:
 
-\begin{lstlisting}[language=Matlab]
+\begin{lstlisting}[language=MATLAB]
 testTsp('Key1', {0, 1, 2}, 10, 'Key2', value2, 'Key3', value3);
 \end{lstlisting}
 
 \noindent Im folgenden Abschnitt ist der Ablauf des Tests mit Aufruf von
 {\tt tsp()} inklusive einer Zeitmessung in gekürzter Form dargestellt:
 
-\lstinputlisting[language=Matlab, firstnumber=8, linerange={8-8,11-12,14-18,34-35}]{Code/testTsp.m}
+\lstinputlisting[language=MATLAB, firstnumber=8, linerange={8-8,11-12,14-18,34-35}]{Code/testTsp.m}
 
 \noindent Zum Speichern der Ergebnisse dienen die folgenden Zeilen Code.
 Der Dateiname wird aus dem Parameternamen und dem Wert zusammengesetzt. Um für
@@ -71,10 +71,10 @@ Dateinamen einfügen (es wird das letzte Element der Liste verwendet).
 Gespeichert wird neben den Kosten des kürzesten Weges der kürzeste Weg selbst
 und die vom evolutionären Algorithmus benötigte Zeit.
 
-\lstinputlisting[language=Matlab, firstnumber=21, firstline=21, lastline=33]{Code/testTsp.m}
+\lstinputlisting[language=MATLAB, firstnumber=21, firstline=21, lastline=33]{Code/testTsp.m}
 
 
-\paragraph{suite.m} ist ein Matlab-Skript und enthält alle durchzuführenden Tests
+\paragraph{suite.m} ist ein MATLAB-Skript und enthält alle durchzuführenden Tests
 als Aufrufe der Funktion {\tt testTsp()}. Die einzelnen Aufrufe werden zum Teil
 in den folgenden Kapiteln dargestellt.
 

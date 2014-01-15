@@ -21,12 +21,12 @@ Beispiel:
 
 \begin{itemize}
   \item 5 Orte entsprechen $5! = 120$ mögliche Reisestrecken.
-  \item 29 Orte entsprechen $29! \doteq 9 \cdot 10^{30}$ mögliche Reisestrecken.
+  \item 29 Orte entsprechen $29! ≈ 9 \cdot 10^{30}$ mögliche Reisestrecken.
 \end{itemize}
 
-\noindent Bei einem Rechner der 100.000 Berechnungen der Reisestreckenlänge pro
-Sekunde schafft bedeutet das im Fall von 5 Orten eine Rechenzeit
-von ca. 1 ms, um herausgefunden welche die kürzeste Strecke ist.
+\noindent Bei einem Rechner, der $10^{5}$ Berechnungen der Reisestreckenlänge pro
+Sekunde schafft, bedeutet das im Fall von fünf Orten eine Rechenzeit
+von ca. 1 ms (einer Millisekunde) um herausgefunden, welche die kürzeste Strecke ist.
 Bei 29 Städten bräuchte dieser Rechner ca. $9 \cdot 10^{16}$
 Jahre\footnote{Das Universum ist
 knapp $13,7 \cdot 10^{9}$ Jahre alt. \citep[siehe][]{wikiUniversum}}!
@@ -57,15 +57,15 @@ Suche nach guten, aber nicht notwendigerweise optimalen Lösungen
 \end{quote}
 
 \paragraph{Dokument} Dieses Dokument
-ist wärend des Wintersemesters 2013/2014 als das
-Ergebnis der Aufgabenstellung aus Vorlesung
+ist während des Wintersemesters 2013/2014 als das
+Ergebnis der Aufgabenstellung aus der Vorlesung
 \emph{Heuristische Optimierungsverfahren} entstanden.
 Die Aufgabe bestand darin „einen evolutionären Algorithmus zur Lösung von
 Travelling Salesman Problems (TSP)“ mit der Softwarebibliothek GEATbx zu entwickeln.
 Der Hauptteil besteht darin „einige der [...] Parameterwerte und Optionen“ zu
 modifizieren „und die Auswirkungen solcher Änderungen auf die Güte des Algorithmus“
 zu untersuchen.
-Dabei ist das Ziel den Algoirthmus so zu konfigurieren, dass er
+Dabei ist das Ziel den Algorithmus so zu konfigurieren, dass er
 „möglichst gute Lösungen in möglichst kurzer Zeit ermittelt.“ \citep[Aus][]{aufg}
 
 Genetische bzw. evolutionäre Algorithmen wurden maßgeblich von den Teams
@@ -131,13 +131,13 @@ Details des Aufbaus der Datei:
   29 x 29 Matrix mit den Reisekosten zwischen den einzelnen Städten als symmetrische Matrix, d.h. es handelt sich um einen ungerichteten Graphen.
   \item Positionen der Städte.\\
   Liste mit Stadtnummer und X-, Y-Koordinaten, welche die Städtepositionen beschreiben.
-  Diese Informationen sind lediglich zur Visualisierung (Matlab Plot) nötig.
+  Diese Informationen sind lediglich zur Visualisierung (MATLAB Plot) nötig.
 \end{itemize}
 
 
 \subsection{Testläufe mit tspVorlage.m}
 
-Das {\tt tspVorlage.m} Skript wurde 15 mal ausgeführt und die Ergebnisse in
+Das {\tt tspVorlage.m} Skript wurde 15 mal ausgeführt, die Ergebnisse in
 Tabelle \ref{testlaeufe} festgehalten und auf Abbildung \ref{fig.testlaeufe}
 visualisiert.
 Eine kleine Auswertung ergibt einen Mittelwert von 3077.93 km mit
@@ -234,7 +234,7 @@ Algorithmus berechnen soll.
 Voreinstellung: 400.
 
 \paragraph{{\tt Termination.Method}} Legt fest mit welcher Methode der
-Optimierungsalgorithmus beendet werden soll.
+Optimierungs\-algorithmus beendet werden soll.
 Voreinstellung: 1 (Beenden nach der maximalen Anzahl der Generationen).
 
 \paragraph{{\tt Output.*}} Diese Parameter sorgen für die
